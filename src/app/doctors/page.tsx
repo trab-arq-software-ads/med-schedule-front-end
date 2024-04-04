@@ -1,6 +1,7 @@
-import styles from "../doctors/style.module.css"
-import Header from "@/components/Header"
-import Card from "../../components/Card"
+import Image from "next/image";
+import Card from "../../components/Card";
+import BackgroundImageDoctors from '../../../public/background.jpg';
+import styles from "../doctors/style.module.css";
 
 export default function Home() {
   const doctors = [
@@ -9,13 +10,13 @@ export default function Home() {
 
   return (
     <main>
-      <Header />
       <div className={styles.imgContainer}>
-        <img
-          className={styles.imgMain}
-          src="/background.jpg"
-          alt="Background Image"
-        ></img>
+        <Image 
+          src={BackgroundImageDoctors}
+          alt="Image de fundo do app"
+          priority
+          fill
+        />
         <div className={styles.listContainer}>
           <h1>Lista de Médicos</h1>
           {doctors.map((doctor) => (

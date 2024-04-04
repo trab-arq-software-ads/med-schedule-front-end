@@ -1,19 +1,22 @@
+import Link from "next/link"
 import styles from "@/components/Header/styles.module.css"
 
 const Header = () => {
   return (
     <div className={styles.topBar}>
-      <span className={styles.nameLogo}>MedSchedule</span>
+      <Link href="/">
+        <span className={styles.nameLogo}>MedSchedule</span>
+      </Link>
       <div className={styles.topBarButtons}>
-        <a href="" className={styles.buttonBar}>
+        <Link href="/doctors" className={styles.buttonBar}>
           Médicos
-        </a>
-        <a href="" className={styles.buttonBar}>
-          Consultas
-        </a>
-        <a href="" className={styles.buttonBar}>
+        </Link>
+        <Link href="/patients" className={styles.buttonBar}>
           Pacientes
-        </a>
+        </Link>
+        <Link href="/appointments" className={styles.buttonBar}>
+          Consultas
+        </Link>
       </div>
     </div>
   )
