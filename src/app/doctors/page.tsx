@@ -5,7 +5,8 @@ import styles from "../doctors/style.module.css";
 
 export default function Home() {
   const doctors = [
-    { id: 1, name: "Davy Eduardo Costa Dantas", specialization: "Pediatra" }
+    { id: 1, name: "Davy Eduardo Costa Dantas", specialization: "Pediatra" },
+    { id: 2, name: "Damião Teodósio", specialization: "Cirurgião Geral" }
   ]
 
   return (
@@ -16,9 +17,12 @@ export default function Home() {
           alt="Image de fundo do app"
           priority
           fill
+          objectPosition="top"
+          objectFit="cover"
         />
         <div className={styles.listContainer}>
           <h1>Lista de Médicos</h1>
+          <div className={styles.list}>
           {doctors.map((doctor) => (
             <div className={styles.content} key={doctor.id}>
               <Card
@@ -27,7 +31,8 @@ export default function Home() {
                 specialization={doctor.specialization}
               />
             </div>
-          ))}
+          ))} 
+          </div>
         </div>
       </div>
     </main>

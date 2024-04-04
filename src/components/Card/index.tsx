@@ -5,7 +5,7 @@ import { MdOutlineModeEditOutline } from "react-icons/md"
 import { FaRegEye } from "react-icons/fa6"
 
 interface CardProps {
-  id?: number
+  id: number
   name: string
   specialization: string
 }
@@ -13,23 +13,25 @@ interface CardProps {
 const Card = ({ id, name, specialization }: CardProps) => {
   return (
     <div className={styles.elementsList}>
+
       <div>
         <span className={styles.idElement}>{id}</span>
         <span>{name}</span>
         <span>{specialization}</span>
-
-        <div className={styles.options}>
-          <a href="" id="trash">
+      </div>
+        
+      <div className={styles.options}>
+          <a href="" id={styles.trash}>
             <GoTrash />
           </a>
-          <a href="" id="edit">
+          <a href="" id={styles.edit}>
             <MdOutlineModeEditOutline />
           </a>
-          <a href="" id="view">
+          <a href="" id={styles.view}>
             <FaRegEye />
           </a>
-        </div>
       </div>
+      
     </div>
   )
 }

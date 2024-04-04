@@ -1,18 +1,14 @@
+
 .elementsList {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-}
+    width: 100%;
+    justify-content: space-between;
+    background: linear-gradient(to right, rgb(36, 104, 194), rgb(38, 188, 207));
+}   
 
-.elementsList h2{
-    font-size: 18pt;
-    font-weight: 600;
-    color: rgb(36, 161, 184);
-    margin: 20px;
-}
-
-.elementsList div {
+.elementsList {
     color: white;
     font-size: 14pt;
     font-weight: 600;
@@ -20,20 +16,20 @@
     width: max-content;
 }
 
-.idElement{
-    width: 48px;
-    justify-content: center;
-    align-content: center;
-    aspect-ratio: 1 / 1;
-}
-
-.elementsList div span, .options {
+.elementsList div, .options {
     display: flex;
     padding: 10px;
     border-radius: 5px;
     margin: 10px 8px;
     align-items: center;
-    background: linear-gradient(to right, rgb(36, 104, 194), rgb(38, 188, 207));
+    position: relative;
+    flex-direction: row;
+}
+
+.elementsList span{
+    justify-items: center;
+    align-content: center;
+    margin: 0 20px;
 }
 
 .options a {
