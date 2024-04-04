@@ -2,32 +2,72 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+#imgMain{
+  width: 100%;
+  height: 600px;
+  object-position: center top;
+  object-fit: cover;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+.content{
+  width: auto;
+  background-color: white;
+  height: 50%;
+  align-items: start;
+  padding: 10px;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  transform: translate(-50%, -50%);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.527) 0px 0px  100px 0.01px;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.topBar {
+  background-color: white;
+  height: 70px;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  width: 100%;
+  padding: 0 40px;
+  box-shadow: 0 1px 100px 0.01px rgba(0, 0, 0, 0.438);
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.nameLogo{
+  font-size: 18pt;
+  font-weight: 700;
+  background: linear-gradient(to right, rgb(36, 104, 194), rgb(38, 188, 207)); 
+  -webkit-background-clip: text; 
+  background-clip: text;
+  color: transparent;
+}
+
+.topBarButtons{
+  width: auto;
+  display: flex;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top:0;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonBar{
+  margin-left: 20px;
+  color: white;
+  height: 70px;
+  align-content: center;
+  font-weight: 500;
+  color: rgb(36, 161, 184);
+  padding: 0 5px;
+}
+
+.buttonBar:hover{
+  background-color: rgb(36, 161, 184);
+  color: white;
+  transition: 0.3s;
 }
