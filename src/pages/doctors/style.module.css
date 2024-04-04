@@ -1,14 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-#imgMain{
-  width: 100%;
-  height: 600px;
-  object-position: center top;
-  object-fit: cover;
-}
-
 .content{
   width: auto;
   background-color: white;
