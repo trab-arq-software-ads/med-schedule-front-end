@@ -1,34 +1,40 @@
-import { Skeleton } from "@/components/ui/skeleton";
 import {
     Table,
     TableBody,
-    TableCaption,
     TableCell,
     TableHead,
     TableHeader,
     TableRow,
 } from "@/components/ui/table";
-  
+import Link from "next/link";
 
-export function ListPatients() {
+export default async function ListPatients() {
+    const response = await fetch('https://api.github.com/users/whohenrique')
+    const user = await response.json()
+
     return (
-        <Table className="mt-6">
-            <TableCaption>Lista de pacientes</TableCaption>
-            <TableHeader>
-                <Skeleton className="min-w-full rounded-xl" />
+        <Table className="bg-blue-200">
+            <TableHeader className="bg-blue-400">
                 <TableRow>
-                    <TableHead className="w-[100px]">Nome Paciente</TableHead>
-                    <TableHead>Status</TableHead>
-                    <TableHead>Method</TableHead>
+                    <TableHead className="text-black font-semibold">ID</TableHead>
+                    <TableHead className="text-black font-semibold">Nome Paciente</TableHead>
+                    <TableHead className="text-black font-semibold">Email</TableHead>
+                    <TableHead className="text-black font-semibold">Telefone</TableHead>
+                    <TableHead className="text-black font-semibold">Data de Nascimento</TableHead>
+                    <TableHead className="text-black font-semibold">
+                        <Link href="/patients/register">Criar Paciente</Link>
+                    </TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                <TableRow>
-                <TableCell className="font-medium">INV001</TableCell>
-                <TableCell>Paid</TableCell>
-                <TableCell>Credit Card</TableCell>
-                <TableCell className="text-right">$250.00</TableCell>
-                </TableRow>
+                    <TableRow key={user.id}>
+                        <TableCell>{user.id}</TableCell>
+                        <TableCell>{user.name}</TableCell>
+                        <TableCell>{user.name}</TableCell>
+                        <TableCell>{user.name}</TableCell>
+                        <TableCell>{user.name}</TableCell>
+                        
+                    </TableRow>
             </TableBody>
         </Table>
     );
