@@ -1,7 +1,7 @@
 .imgContainer {
   position: relative;
   width: 100%;
-  height: 90vh;
+  height: 600px;
 }
 
 .imgMain {
@@ -13,26 +13,37 @@
 
 .listContainer {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate( -50%, -50% );
+  width: auto;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  z-index: 1; 
 }
 
 .listContainer h1 {
-  font-size: 42px;
+  z-index: 1;
+  font-size: 30pt;
+  font-weight: 600;
+  color: #26B9CE;
+  margin: 20px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.listContainer > .list {
+  border-radius: 15px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.548) 0px 0px 100px 0.01px;
 }
 
 .content {
   width: auto;
-  background-color: white;
   padding: 10px;
-  margin-top: 20px; 
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.527) 0px 0px 100px 0.01px;
+  margin-top: 10px; 
+  width: 100%;
 }
