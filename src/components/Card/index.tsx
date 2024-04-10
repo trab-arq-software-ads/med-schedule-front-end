@@ -13,25 +13,23 @@ interface CardProps {
 const Card = ({ id, name, specialization }: CardProps) => {
   return (
     <div className={styles.elementsList}>
-
       <div>
         <span className={styles.idElement}>{id}</span>
         <span>{name}</span>
         <span>{specialization}</span>
       </div>
-        
+
       <div className={styles.options}>
-          <a href="" id={styles.trash}>
-            <GoTrash />
-          </a>
-          <a href="" id={styles.edit}>
-            <MdOutlineModeEditOutline />
-          </a>
-          <a href="" id={styles.view}>
-            <FaRegEye />
-          </a>
+        <a href="" id={styles.trash}>
+          <GoTrash />
+        </a>
+        <a href="" id={styles.edit}>
+          <MdOutlineModeEditOutline />
+        </a>
+        <a href="" id={styles.view}>
+          <FaRegEye />
+        </a>
       </div>
-      
     </div>
   )
 }

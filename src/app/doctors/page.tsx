@@ -1,7 +1,7 @@
-import Image from "next/image";
-import Card from "../../components/Card";
-import BackgroundImageDoctors from '../../../public/background.jpg';
-import styles from "../doctors/style.module.css";
+import Image from "next/image"
+import Card from "../../components/Card"
+import BackgroundImageDoctors from "../../../public/background.jpg"
+import styles from "../doctors/style.module.css"
 
 export default function Home() {
   const doctors = [
@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main>
       <div className={styles.imgContainer}>
-        <Image 
+        <Image
           src={BackgroundImageDoctors}
           className="hidden sm:flex sm:object-cover -z-10 brightness-50"
           alt="Image de fundo do app"
@@ -22,15 +22,15 @@ export default function Home() {
         <div className={styles.listContainer}>
           <h1>Lista de Médicos</h1>
           <div className={styles.list}>
-          {doctors.map((doctor) => (
-            <div className={styles.content} key={doctor.id}>
-              <Card
-                id={doctor.id}
-                name={doctor.name}
-                specialization={doctor.specialization}
-              />
-            </div>
-          ))} 
+            {doctors.map((doctor) => (
+              <div className={styles.content} key={doctor.id}>
+                <Card
+                  id={doctor.id}
+                  name={doctor.name}
+                  specialization={doctor.specialization}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
