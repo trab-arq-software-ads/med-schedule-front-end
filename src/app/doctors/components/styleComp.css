@@ -1,0 +1,47 @@
+.modal-edit{
+    background-color: rgb(38, 104, 167);
+    width: min-content;
+    height: auto;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+    flex-direction: column;
+}
+
+#edit-button{
+    border: none;
+    padding: 5px;
+    background-color: rgb(46, 105, 216);
+    color: white;
+    font-weight: 700;
+    font-size: 12pt;
+    border-radius: 5px;
+}
+
+.modal-edit input{
+    color: black;
+    margin: 5px 0px;
+    padding: 7px;
+    border: 0;
+    outline-style: none;
+    border-radius: 30px;
+}
+
+.modal-edit button{
+    margin: 10px 20px 0 0;
+}
+
+#update{
+    background-color: rgb(34, 161, 8);
+    color:white;
+}
+
+#cancel{
+    background-color: white;
+    color: rgb(145, 7, 7);
+}

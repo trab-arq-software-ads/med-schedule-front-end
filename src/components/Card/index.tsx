@@ -14,8 +14,8 @@ const Card = ({ id, name, specialization }: CardProps) => {
   return (
     <div className={styles.elementsList}>
 
-      <div>
-        <span className={styles.idElement}>{id}</span>
+      <span className={styles.idElement}>{id}</span>
+      <div className={styles.info}>
         <span>{name}</span>
         <span>{specialization}</span>
       </div>
