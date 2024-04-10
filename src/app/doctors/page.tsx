@@ -14,11 +14,10 @@ export default function Home() {
       <div className={styles.imgContainer}>
         <Image 
           src={BackgroundImageDoctors}
+          className="hidden sm:flex sm:object-cover -z-10 brightness-50"
           alt="Image de fundo do app"
           priority
           fill
-          objectPosition="top"
-          objectFit="cover"
         />
         <div className={styles.listContainer}>
           <h1>Lista de Médicos</h1>

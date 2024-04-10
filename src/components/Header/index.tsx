@@ -1,21 +1,22 @@
 import Link from "next/link"
+import clsx from 'clsx';
 import styles from "@/components/Header/styles.module.css"
 
 const Header = () => {
   return (
-    <div className={styles.topBar}>
+    <div className={clsx("bg-slate-950", styles.topBar)}>
       <Link href="/">
         <span className={styles.nameLogo}>MedSchedule</span>
       </Link>
       <div className={styles.topBarButtons}>
         <Link href="/doctors" className={styles.buttonBar}>
-          Médicos
+          Doctors
         </Link>
         <Link href="/patients" className={styles.buttonBar}>
-          Pacientes
+          Patients
         </Link>
         <Link href="/appointments" className={styles.buttonBar}>
-          Consultas
+          Appointments
         </Link>
       </div>
     </div>

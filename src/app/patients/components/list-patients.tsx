@@ -5,11 +5,11 @@ import {
     TableHead,
     TableHeader,
     TableRow,
+    TableFooter
 } from "@/components/ui/table";
-import Link from "next/link";
 
 export default async function ListPatients() {
-    const response = await fetch('https://api.github.com/users/whohenrique')
+    const response = await fetch('https://api.github.com/users/')
     const user = await response.json()
 
     return (
@@ -21,20 +21,20 @@ export default async function ListPatients() {
                     <TableHead className="text-black font-semibold">Email</TableHead>
                     <TableHead className="text-black font-semibold">Telefone</TableHead>
                     <TableHead className="text-black font-semibold">Data de Nascimento</TableHead>
-                    <TableHead className="text-black font-semibold">
-                        <Link href="/patients/register">Criar Paciente</Link>
-                    </TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                    <TableRow key={user.id}>
-                        <TableCell>{user.id}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        <TableCell>{user.name}</TableCell>
-                        
-                    </TableRow>
+                {Array.from({length: 10}).map((_, index) => { 
+                    return (
+                        <TableRow key={index}>
+                            <TableCell>{user.id}</TableCell>
+                            <TableCell>{user.name}</TableCell>
+                            <TableCell>{user.name}</TableCell>
+                            <TableCell>{user.name}</TableCell>
+                            <TableCell>{user.name}</TableCell>
+                        </TableRow>
+                    )
+                })}
             </TableBody>
         </Table>
     );
