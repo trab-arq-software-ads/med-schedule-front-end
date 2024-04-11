@@ -7,26 +7,33 @@ import React, { useState, useEffect } from 'react';
 import Link from "next/link"
 import CreateDoctorModal from "./components/create-doctor-modal";
 
+interface Doctor {
+  id:number,
+  name:string,
+  specialization:string
+}
+
 export default function Home() {
-  const [doctors, setDoctors] = useState([])
+  const [doctors, setDoctors] = useState<Doctor[]>([]);
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = async () => {
       setShowModal(true);
     };
 
-  useEffect(() => {
-    const loadDoctors = async () => {
-      try {
-        const response = await fetch('http://localhost:3002/medicos')
-        console.log(response)
-        const data = await response.json()
-        setDoctors(data.doctors);
-        console.log(data)
-      } catch (error) {
-        console.error(error)
-      }
+  async function loadDoctors () {
+    try {
+      const response = await fetch('http://localhost:3002/medicos')
+      console.log(response)
+      const data = await response.json()
+      setDoctors(data.doctors);
+      console.log(data)
+    } catch (error) {
+      console.error(error)
     }
+  }
+
+  useEffect(() => {
     loadDoctors()
   }, [])
 
@@ -47,12 +54,12 @@ export default function Home() {
           <h1>Nossos Médicos</h1>
 
           <button onClick={handleDelete} className={styles.CreateDoctor_btn}>Adicionar Médico</button>
-          <CreateDoctorModal isOpen={showModal} onRequestClose={() => setShowModal(false)} />
+          <CreateDoctorModal refreshList={loadDoctors}  isOpen={showModal} onRequestClose={() => setShowModal(false)} />
 
           <div className={styles.list}>
           {Array.isArray(doctors) && doctors.map((doctor: { id: number, name: string, specialization: string })=>(
             <div className={styles.content} key={doctor.id}>
-              <Card
+              <Card func = {loadDoctors}
                 id={doctor.id}
                 name={doctor.name}
                 specialization={doctor.specialization}

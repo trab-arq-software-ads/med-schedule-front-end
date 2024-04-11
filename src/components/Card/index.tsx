@@ -1,16 +1,22 @@
 import styles from "@/components/Card/styles.module.css"
-
+import Delete from '../../app/doctors/components/delete-doctor-modal'
 import { GoTrash } from "react-icons/go"
 import { MdOutlineModeEditOutline } from "react-icons/md"
 import { FaRegEye } from "react-icons/fa6"
+import { useState } from "react"
+import Link from "next/link"
 
 interface CardProps {
   id: number
   name: string
   specialization: string
+  func: () => void
 }
 
-const Card = ({ id, name, specialization }: CardProps) => {
+
+const Card = ({ id, name, specialization, func }: CardProps) => {
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  
   return (
     <div className={styles.elementsList}>
 
@@ -21,15 +27,17 @@ const Card = ({ id, name, specialization }: CardProps) => {
       </div>
         
       <div className={styles.options}>
-          <a href="" id={styles.trash}>
+          <button onClick={async () => setShowDeleteModal(true)} id={styles.trash}>
             <GoTrash />
-          </a>
-          <a href="" id={styles.edit}>
+          </button>
+          <Delete refreshList={func} onRequestClose={() => setShowDeleteModal(false)} doctor={{ id, name, specialization }} isOpen={showDeleteModal}  />
+
+          <button  id={styles.edit}>
             <MdOutlineModeEditOutline />
-          </a>
-          <a href="" id={styles.view}>
+          </button>
+          <button  id={styles.view}>
             <FaRegEye />
-          </a>
+          </button>
       </div>
       
     </div>

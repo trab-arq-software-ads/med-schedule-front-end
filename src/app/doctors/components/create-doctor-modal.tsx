@@ -1,8 +1,8 @@
 import Modal from 'react-modal'
-import './styleComp.css'
+import './styleCompCreate.css'
 import { useState } from 'react'
 
-export default function CreateDoctorModal({ isOpen, onRequestClose }: { isOpen: boolean, onRequestClose: () => void }) {
+export default function CreateDoctorModal({ isOpen, onRequestClose, refreshList }: { isOpen: boolean, onRequestClose: () => void, refreshList: () => void}) {
   
     const [name, setName] = useState('')
     const [specialization, setSpecialization] = useState('')
@@ -10,7 +10,6 @@ export default function CreateDoctorModal({ isOpen, onRequestClose }: { isOpen: 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-            try {
               const response = await fetch('http://localhost:3002/medicos/create', {
                 method: 'POST',
                 headers: {
@@ -20,16 +19,15 @@ export default function CreateDoctorModal({ isOpen, onRequestClose }: { isOpen: 
                   name:name,
                   specialization:specialization,
                 }),
+              }) .then(() => {
+                setName('')
+                setSpecialization('')
+                onRequestClose()
+                refreshList()
+                console.log('Médico criado com sucesso');
+              }) .catch((error) => {
+                console.error('Erro ao criar médico:', error);
               });
-
-              if (!response.ok) {
-                throw new Error('Erro ao criar médico');
-              }
-              // Se o médico foi criado com sucesso, você pode redirecionar ou exibir uma mensagem de sucesso
-              console.log('Médico criado com sucesso');
-            } catch (error) {
-              console.error('Erro ao criar médico:', error);
-            }
           };
 
           return (
@@ -55,7 +53,7 @@ export default function CreateDoctorModal({ isOpen, onRequestClose }: { isOpen: 
                   onChange={(e) => setSpecialization(e.target.value)}
                   required
                 />
-                <button type="submit">Adicionar</button>
+                <button id={'update'} type="submit">Adicionar</button>
               </form>
             </Modal>
           );

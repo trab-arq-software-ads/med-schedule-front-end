@@ -1,0 +1,86 @@
+.modal-delete{
+    background: linear-gradient(to right, rgb(0, 0, 0), rgb(134, 45, 45));
+    width: max-content;
+    height: auto;
+    padding: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 20px;
+    color: white;
+    font-weight: 500;
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px rgb(190, 190, 190);
+}
+
+#edit-button{
+    border: none;
+    padding: 5px;
+    background-color: rgb(46, 105, 216);
+    color: white;
+    font-weight: 700;
+    font-size: 12pt;
+    border-radius: 5px;
+}
+
+.modal-delete input{
+    color: rgb(0, 0, 0);
+    margin: 5px 0px;
+    padding: 7px;
+    border: 0;
+    outline-style: none;
+    border-radius: 30px;
+    background-color: rgb(255, 255, 255);
+}
+
+.modal-delete h2{
+    margin: 0;
+    padding: 0;
+    font-size: 18pt;
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.modal-delete form{
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    align-items: center;
+    text-justify: auto;
+    text-align: left;
+}
+
+.modal-delete button{
+    border: none;
+    margin: 15px;
+    padding: 5px;
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-weight: 700;
+    font-size: 12pt;
+    border-radius: 5px;
+}
+
+#update{
+    background-color: rgb(38, 168, 49);
+    color:white;
+    border: solid 1px rgba(0, 0, 0, 0.281);
+}
+
+#cancel{
+    background-color: white;
+    color: rgb(145, 7, 7);
+}
+
+#delete{
+    padding: 5px;
+    background-color: rgb(197, 56, 56);
+    color: white;
+    font-weight: 700;
+    font-size: 12pt;
+    border-radius: 5px;
+}
