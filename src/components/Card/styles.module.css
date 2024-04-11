@@ -1,48 +1,56 @@
-
 .elementsList {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
-    background: linear-gradient(to right, rgb(36, 104, 194), rgb(38, 188, 207));
-}   
-
-.elementsList {
-    color: white;
-    font-size: 14pt;
-    font-weight: 600;
-    display: flex;
-    width: max-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  flex: 1;
+  justify-content: space-between;
+  background: linear-gradient(to right, rgb(36, 104, 194), rgb(38, 188, 207));
 }
 
-.elementsList div, .options {
-    display: flex;
-    padding: 10px;
-    border-radius: 5px;
-    margin: 10px 8px;
-    align-items: center;
-    position: relative;
-    flex-direction: row;
+.elementsList {
+  color: white;
+  font-size: 14pt;
+  font-weight: 600;
+  display: flex;
+  width: max-content;
 }
 
-.elementsList span{
-    justify-items: center;
-    align-content: center;
-    margin: 0 20px;
+.info {
+  display: flex;
+  justify-content: space-between;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.elementsList .info,
+.options {
+  display: flex;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 8px;
+  align-items: center;
+  position: relative;
+  flex-direction: row;
+}
+
+.elementsList span {
+  justify-items: center;
+  align-content: center;
+  margin: 0 20px;
 }
 
 .options a {
-    font-size: 17pt;
-    margin: 0 10px;
+  font-size: 17pt;
+  margin: 0 10px;
 }
 
-#trash:hover{
-    color: rgb(192, 44, 44);
+#trash:hover {
+  color: rgb(192, 44, 44);
 }
-#edit:hover{
-    color: rgb(24, 43, 209);
+#edit:hover {
+  color: rgb(24, 43, 209);
 }
-#view:hover{
-    color: rgb(0, 0, 0);
+#view:hover {
+  color: rgb(0, 0, 0);
 }

@@ -1,5 +1,6 @@
-'use client';
+"use client"
 
+import { useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -11,49 +12,59 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage,
-
+  FormMessage
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 
 const PatientFormSchema = z.object({
-    username: z.string()
-        .min(6,
-        {
-            message: "O nome deve conter no minimo 6 caracteres.",
-        }
-    ),
-    email: z.string()
-        .email(
-        {
-            message: "O email não é válido."
-        }    
-    ), 
-    phone: z.string()
-        .max(14,
-          {
-            message: "informe um número correto."
-          }  
-        )
-    ,
-    birthdate: z.string()
-
-    ,
+  username: z.string().min(6, {
+    message: "O nome deve conter no minimo 6 caracteres."
+  }),
+  email: z.string().email({
+    message: "O email não é válido."
+  }),
+  phone: z.string().max(14, {
+    message: "Informe um número correto."
+  }),
+  birthdate: z.string()
 })
 
 type PatientFormSchema = z.infer<typeof PatientFormSchema>
 
 export function PatientForm() {
-    const form = useForm<PatientFormSchema>({
-        resolver: zodResolver(PatientFormSchema),
-    })
+  const [submitting, setSubmitting] = useState(false)
+  const form = useForm<PatientFormSchema>({
+    resolver: zodResolver(PatientFormSchema)
+  })
 
-    function onSubmit(values: PatientFormSchema) {
-        console.log(values)
+  async function onSubmit(values: PatientFormSchema) {
+    setSubmitting(true)
+    try {
+      const response = await fetch("http://localhost:3002/pacientes/create/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(values)
+      })
+      if (!response.ok) {
+        throw new Error("Erro ao criar paciente")
+      }
+      // Aqui você pode lidar com a resposta da API se necessário
+      console.log("Paciente criado com sucesso!")
+    } catch (error) {
+      console.error("Erro ao criar paciente:", error)
+    } finally {
+      setSubmitting(false)
     }
-    return (
+  }
+
+  return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="bg-blue-400/80 w-96 space-y-4 p-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="bg-blue-400/80 w-96 space-y-4 p-6"
+      >
         <FormField
           control={form.control}
           name="username"
@@ -74,7 +85,11 @@ export function PatientForm() {
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="exemplo@gmail.com" {...field} />
+                <Input
+                  type="email"
+                  placeholder="exemplo@gmail.com"
+                  {...field}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,7 +121,13 @@ export function PatientForm() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="bg-blue-500 hover:bg-blue-400">Criar</Button>
+        <Button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-400"
+          disabled={submitting}
+        >
+          {submitting ? "Enviando..." : "Criar"}
+        </Button>
       </form>
     </Form>
   )
