@@ -16,7 +16,8 @@ export function LampDemo() {
         }}
         className="mt-8 bg-gradient-to-br from-slate-300 to-slate-500 py-4 bg-clip-text text-center text-xl font-medium tracking-tight text-transparent md:text-6xl"
       >
-        MedSchedule <br /> the largest appointment scheduling system
+        MedSchedule 
+        <br /> the largest appointment scheduling system 
       </motion.h1>
     </LampContainer>
   );
