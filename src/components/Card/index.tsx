@@ -1,5 +1,6 @@
 import styles from "@/components/Card/styles.module.css"
 import Delete from '../../app/doctors/components/delete-doctor-modal'
+import Update from '../../app/doctors/components/update-doctor-modal'
 import { GoTrash } from "react-icons/go"
 import { MdOutlineModeEditOutline } from "react-icons/md"
 import { FaRegEye } from "react-icons/fa6"
@@ -16,6 +17,7 @@ interface CardProps {
 
 const Card = ({ id, name, specialization, func }: CardProps) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showUpdateModal, setShowUpdateModal] = useState(false);
   
   return (
     <div className={styles.elementsList}>
@@ -32,8 +34,10 @@ const Card = ({ id, name, specialization, func }: CardProps) => {
           </button>
           <Delete refreshList={func} onRequestClose={() => setShowDeleteModal(false)} doctor={{ id, name, specialization }} isOpen={showDeleteModal}  />
 
-          <button  id={styles.edit}>
+          <button onClick={async () => setShowUpdateModal(true)}  id={styles.edit}>
             <MdOutlineModeEditOutline />
+          <Update refreshList={func} onRequestClose={() => setShowUpdateModal(false)} doctor={{ id, name, specialization }} isOpen={showUpdateModal}  />
+          
           </button>
           <button  id={styles.view}>
             <FaRegEye />

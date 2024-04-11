@@ -1,60 +1,62 @@
 import Modal from 'react-modal'
-import './styleCompCreate.css'
+import './styleCompUpdate.css'
 import { useState } from 'react'
 
-export default function CreateDoctorModal({ isOpen, onRequestClose, refreshList }: { isOpen: boolean, onRequestClose: () => void, refreshList: () => void}) {
-  
-    const [name, setName] = useState('')
-    const [specialization, setSpecialization] = useState('')
+export default function UpdateDoctorModal({doctor, isOpen, onRequestClose, refreshList}: {doctor:any, isOpen: boolean, onRequestClose: () => void, refreshList: () => void}) {
+
+  const [name, setName] = useState(doctor.name)
+  const [specialization, setSpecialization] = useState(doctor.specialization)
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-              const response = await fetch('http://localhost:3002/medicos/create', {
-                method: 'POST',
+              const response = await fetch(`http://localhost:3002/medicos/update/${doctor.id}`, {
+                method: 'PUT',
                 headers: {
                   'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                  name:name,
-                  specialization:specialization,
+                  name: name,
+                  specialization: specialization,
                 }),
               }) .then(() => {
-                setName('')
-                setSpecialization('')
                 onRequestClose()
                 refreshList()
-                console.log('Médico criado com sucesso');
+                console.log('Médico atualizado com sucesso');
               }) .catch((error) => {
-                console.error('Erro ao criar médico:', error);
+                console.error('Erro ao deletar médico:', error);
               });
           };
 
           return (
             <Modal
-              className={'modal-edit'}
+              className={'modal-update'}
               isOpen={isOpen}
               onRequestClose={onRequestClose}
-              contentLabel="Create Doctor Modal"
+              contentLabel="Update Doctor Modal"
             >
-              <h2>Adicionar Médico</h2>
+              <h2>Atualizar médico</h2>
               <form onSubmit={handleSubmit}>
+
                 <input
                   type="text"
                   placeholder="Nome"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  required
-                />
+                  required/>
                 <input
                   type="text"
                   placeholder="Especialização"
                   value={specialization}
                   onChange={(e) => setSpecialization(e.target.value)}
-                  required
-                />
-                <button id={'create'} type="submit">Adicionar</button>
+                  required/>
+
+                <div>
+                  <button id={'update'} type="submit">Atualizar</button>
+                  <button onClick={() => onRequestClose()} type="submit">Cancelar</button>
+                </div>
               </form>
+
             </Modal>
           );
     
