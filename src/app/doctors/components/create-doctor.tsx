@@ -4,11 +4,11 @@ import { SyntheticEvent, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { DoctorProps } from "@/components/ui/card-hover-effect"
 
-export function PatientForm() {
+export function DoctorForm() {
   const [name, setName] = useState("")
-  const [email, setEmail] = useState("")
-  const [phone, setPhone] = useState("")
+  const [specialization, setSpecialization] = useState("")
   const [isMutating, setIsMutating] = useState(false)
 
   const router = useRouter()
@@ -17,16 +17,15 @@ export function PatientForm() {
     e.preventDefault()
     setIsMutating(true)
 
-    await fetch("http://localhost:3001/patients/", {
+    await fetch("http://localhost:3001/doctors/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ name, email, phone })
+      body: JSON.stringify({ name, specialization })
     })
     setName("")
-    setEmail("")
-    setPhone("")
+    setSpecialization("")
     router.refresh()
   }
   function handleChange() {
@@ -35,7 +34,7 @@ export function PatientForm() {
 
   return (
     <div className="h-[600px] w-[450px] flex flex-col items-center p-4">
-      <h1 className="text-3xl font-bold text-cyan-700">Create Patient</h1>
+      <h1 className="text-3xl font-bold text-cyan-700">Create Doctor</h1>
       <form
         onSubmit={handleSubmit}
         className="flex flex-col items-center text-black w-full space-y-4 mt-4 py-4"
@@ -44,21 +43,14 @@ export function PatientForm() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Name"
+          placeholder="Doctor name"
           className="border border-gray-300 text-md font-bold text-md p-2 rounded-lg w-full h-16"
         />
         <Input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Email"
-          className="border border-gray-300 text-md font-bold p-2 rounded-md w-full h-16"
-        />
-        <Input
           type="text"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
-          placeholder="Phone"
+          value={specialization}
+          onChange={(e) => setSpecialization(e.target.value)}
+          placeholder="Specialization"
           className="border border-gray-300 text-md font-bold p-2 rounded-md w-full h-16"
         />
         <Button
