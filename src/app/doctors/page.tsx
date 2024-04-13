@@ -7,24 +7,7 @@ import { TypewriterEffect } from "@/components/ui/typewriter-effect"
 import { Button } from "@/components/ui/button"
 
 export default function Doctors() {
-  const [doctors, setDoctors] = useState<DoctorProps[]>([])
 
-  useEffect(() => {
-    fetchDoctors()
-  }, [])
-
-  const fetchDoctors = async () => {
-    try {
-      const response = await fetch("http://localhost:3001/doctors")
-      if (!response.ok) {
-        throw new Error("Failed to fetch doctors")
-      }
-      const data = await response.json()
-      setDoctors(data)
-    } catch (error) {
-      console.error("Error fetching doctors:", error)
-    }
-  }
 
   const words = [
     { text: "Your", className: "text-white" },
@@ -48,7 +31,7 @@ export default function Doctors() {
       </div>
       <aside className="flex flex-col items-center justify-center mt-14">
         <div className="">
-          <HoverEffect items={doctors} />
+          <HoverEffect />
         </div>
 
         <div className="mt-6">

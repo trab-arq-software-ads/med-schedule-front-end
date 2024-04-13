@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useState, SyntheticEvent } from "react"
+import { useState, SyntheticEvent, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import { AnimatePresence, motion } from "framer-motion"
 import { Trash, Pencil } from "lucide-react"
@@ -23,19 +23,37 @@ export interface DoctorProps {
 }
 
 export const HoverEffect = ({
-  items,
   className
 }: {
-  items: DoctorProps[]
   className?: string
   onDeleteDoctor?: (doctorId: number) => void
   onEditDoctor?: (doctorID: number) => void
 }) => {
+  
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [isMutating, setIsMutating] = useState(false)
   const router = useRouter()
   const [name, setName] = useState("")
   const [specialization, setSpecialization] = useState("")
+  const [doctors, setDoctors] = useState<DoctorProps[]>([])
+
+
+  useEffect(() => {
+    fetchDoctors()
+  }, [])
+
+  const fetchDoctors = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/doctors")
+      if (!response.ok) {
+        throw new Error("Failed to fetch doctors")
+      }
+      const data = await response.json()
+      setDoctors(data)
+    } catch (error) {
+      console.error("Error fetching doctors:", error)
+    }
+  }
 
   async function handleDeleteDoctor(doctorId: number) {
     setIsMutating(true)
@@ -64,7 +82,9 @@ export const HoverEffect = ({
     })
     setName("")
     setSpecialization("")
-    router.replace("http://localhost:3000/doctors")
+    setIsMutating(false)
+    window.alert("Patient created successfully")
+    fetchDoctors()
   }
 
 
@@ -76,7 +96,7 @@ export const HoverEffect = ({
         className
       )}
     >
-      {items.map((doctor, idx) => (
+      {doctors.map((doctor, idx) => (
         <div key={doctor.id}>
           <div
             className="relative group block p-2 h-full  "
@@ -129,14 +149,14 @@ export const HoverEffect = ({
                           type="text"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
-                          placeholder="Doctor name"
+                          placeholder={doctor.name}
                           className="border border-gray-300 text-md font-bold text-md p-2 rounded-lg w-full h-16"
                         />
                         <Input
                           type="text"
                           value={specialization}
                           onChange={(e) => setSpecialization(e.target.value)}
-                          placeholder="Specialization"
+                          placeholder={doctor.specialization}
                           className="border border-gray-300 text-md font-bold p-2 rounded-md w-full h-16"
                         />
                         <Button

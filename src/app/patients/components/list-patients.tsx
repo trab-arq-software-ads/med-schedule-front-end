@@ -41,7 +41,9 @@ const ListPatients = () => {
     goToEditPage(id)
   }
 
-  const goToEditPage = (id: number) => {}
+  const goToEditPage = (id: number) => {
+    router.push(`http://localhost:3000/patients/${id}`)
+  }
   const onHistory = (id: number) => {
     router.push(`http://localhost:3000/patients/history/${id}`)
   }
