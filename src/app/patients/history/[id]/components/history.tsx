@@ -4,8 +4,8 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 
 import Link from "next/link"
-import { PatientProps } from "../../../../appointments/components/list-appointments"
-import { DoctorProps } from "../../../../appointments/components/list-appointments"
+import { PatientProps } from "../../../../appointments/components/create-appointment"
+import { DoctorProps } from "../../../../appointments/components/create-appointment"
 import { Button } from "@/components/ui/button"
 import { Dropdown } from "../../../../../components/Dropdown/index"
 interface AppointmentsProps {
