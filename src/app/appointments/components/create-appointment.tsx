@@ -4,26 +4,26 @@ import { SyntheticEvent, useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+export interface PatientProps {
+    id: number
+    name: string
+    email: string
+    phone: string
+}
+export interface DoctorProps {
+    id: number
+    name: string
+    specialization: string
+}
 
 export function AppointmentForm() {
 
-    interface PatientProps {
-        id: number
-        name: string
-        email: string
-        phone: string
-    }
-    interface DoctorProps {
-        id: number
-        name: string
-        specialization: string
-    }
       
 
     const [doctors, setDoctors] = useState<DoctorProps[]>([])
-    const [patients, setPatients] = useState<DoctorProps[]>([])
-    const [doctor, setDoctor] = useState("")
-    const [patient, setPatient] = useState("")
+    const [patients, setPatients] = useState<PatientProps[]>([])
+    const [doctor_id, setDoctor] = useState("")
+    const [patient_id, setPatient] = useState("")
     const [date, setDate] = useState("")
     const [symptoms, setSymptoms] = useState("")
     const [diagnosis, setDiagnosis] = useState("")
@@ -72,7 +72,7 @@ export function AppointmentForm() {
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify({ doctor, patient, date, symptoms, diagnosis })
+        body: JSON.stringify({ doctor_id, patient_id, date, symptoms, diagnosis })
         })
         setDoctor("")
         setPatient("")
@@ -92,14 +92,16 @@ export function AppointmentForm() {
             onSubmit={handleSubmit}
             className="flex flex-col items-center text-black w-full space-y-4 mt-4 py-4"
             >
-            <select className="border border-gray-300 text-md font-bold text-md p-2 rounded-lg w-full h-16">
+            <select onChange={(e) => setDoctor(e.target.value)} className="border border-gray-300 text-md font-bold text-md p-2 rounded-lg w-full h-16">
+                <option value="">Select a Doctor</option>
                 {doctors.map( d => (
                 <option key={d.name} value={d.id}>
                     {d.name}
                 </option>
                 ))}
             </select>
-            <select className="border border-gray-300 text-md font-bold text-md p-2 rounded-lg w-full h-16">
+            <select onChange={(e) => setPatient(e.target.value)} className="border border-gray-300 text-md font-bold text-md p-2 rounded-lg w-full h-16">
+                 <option value="">Select a Patient</option>
                 {patients.map( p => (
                 <option key={p.name} value={p.id}>
                     {p.name}
@@ -107,7 +109,7 @@ export function AppointmentForm() {
                 ))}
             </select>
             <Input
-                type="date"
+                type="datetime-local"
                 onChange={(e) => setDate(e.target.value)}
                 placeholder="Date"
                 className="border border-gray-300 text-md font-bold text-md p-2 rounded-lg w-full h-16"

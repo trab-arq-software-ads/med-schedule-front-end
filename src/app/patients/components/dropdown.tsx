@@ -14,9 +14,10 @@ import {
 interface DropdownProps {
   onDelete: () => void
   onEdit: () => void
+  onHistory: () => void
 }
 
-export function Dropdown({ onDelete, onEdit }: DropdownProps) {
+export function Dropdown({ onDelete, onEdit, onHistory }: DropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -30,6 +31,12 @@ export function Dropdown({ onDelete, onEdit }: DropdownProps) {
       <DropdownMenuContent className="w-56">
         <DropdownMenuLabel>Actions</DropdownMenuLabel>
         <DropdownMenuSeparator />
+        <DropdownMenuItem
+          className="text-cyan-700 hover:bg-cyan-700 hover:text-white"
+          onClick={onHistory}
+        >
+          Medical History
+        </DropdownMenuItem>
         <DropdownMenuItem
           className="text-cyan-700 hover:bg-cyan-700 hover:text-white"
           onClick={onEdit}

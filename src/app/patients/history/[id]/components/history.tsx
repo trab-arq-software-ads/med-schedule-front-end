@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
 
+import Link from "next/link"
+import { PatientProps } from "../../../../appointments/components/list-appointments"
+import { DoctorProps } from "../../../../appointments/components/list-appointments"
 import { Button } from "@/components/ui/button"
-import { Dropdown } from "../../../components/Dropdown"
-import { PatientProps } from "./create-appointment"
-import { DoctorProps } from "./create-appointment"
+import { Dropdown } from "../../../../../components/Dropdown/index"
 interface AppointmentsProps {
   id: number,
   doctor_id: number,
@@ -16,12 +16,15 @@ interface AppointmentsProps {
   symptoms: string,
   diagnosis: string,
 }
+type propsType = {
+  id: number
+}
 
-const ListAppointments = () => {
+const ListAppointments = (props: propsType) => {
   const [appointments, setAppointments] = useState<AppointmentsProps[]>([])
+  const [doctors, setDoctors] = useState<PatientProps[]>([])
+  const [patients, setPatients] = useState<PatientProps>([])
   const [isMutating, setIsMutating] = useState(false)
-  const [doctors, setDoctors] = useState<DoctorProps[]>([])
-  const [patients, setPatients] = useState<PatientProps[]>([])
 
   const router = useRouter()
 
@@ -49,14 +52,15 @@ const ListAppointments = () => {
       console.error("Error fetching patients:", error)
       }
   }
-
   useEffect(() => {
     fetchDoctors()
     fetchPatients()
-    fetch("http://localhost:3001/appointments")
+    fetch(`http://localhost:3001/appointments/${props.id}`)
       .then((response) => response.json())
       .then((data) => setAppointments(data))
   }, [])
+
+  
 
   async function handleDeleteAppointment(appointmentsId: number) {
     setIsMutating(true)
@@ -111,7 +115,7 @@ const ListAppointments = () => {
             <tr key={a.id} className="hover:bg-gray-100 cursor-pointer">
               <td className="px-6 py-4 whitespace-nowrap">{a.id}</td>
               <td className="px-6 py-4 whitespace-nowrap">{doctors.find(d => d.id == a.doctor_id)?.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{patients.find(d => d.id == a.patient_id)?.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{patients.find(p => p.id == a.patient_id)?.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">{a.date}</td>
               <td className="px-6 py-4 whitespace-nowrap">{a.symptoms}</td>
               <td>

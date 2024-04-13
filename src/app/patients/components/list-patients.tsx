@@ -1,11 +1,10 @@
 "use client"
-
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 
 import { Button } from "@/components/ui/button"
-import { Dropdown } from "../../../components/Dropdown"
+import { Dropdown } from "./dropdown"
 interface PatientProps {
   id: number
   name: string
@@ -43,6 +42,9 @@ const ListPatients = () => {
   }
 
   const goToEditPage = (id: number) => {}
+  const onHistory = (id: number) => {
+    router.push(`http://localhost:3000/patients/history/${id}`)
+  }
 
   return (
     <div className="container mx-auto px-4 py-2">
@@ -81,6 +83,7 @@ const ListPatients = () => {
                 <Dropdown
                   onDelete={() => handleDeletePatient(patient.id)}
                   onEdit={() => handleEditPatient(patient.id)}
+                  onHistory={() => onHistory(patient.id)}
                 />
               </td>
             </tr>
