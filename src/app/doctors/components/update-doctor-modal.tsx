@@ -28,6 +28,7 @@ export default function UpdateDoctorModal({doctor, isOpen, onRequestClose, refre
               });
           };
 
+        
           return (
             <Modal
               className={'modal-update'}

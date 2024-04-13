@@ -64,6 +64,7 @@ export default function Home() {
                 name={doctor.name}
                 specialization={doctor.specialization}
               />
+              
             </div>
           ))} 
           </div>

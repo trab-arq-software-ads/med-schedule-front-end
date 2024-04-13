@@ -23,6 +23,7 @@ const Card = ({ id, name, specialization, func }: CardProps) => {
     <div className={styles.elementsList}>
 
       <span className={styles.idElement}>{id}</span>
+      
       <div className={styles.info}>
         <span>{name}</span>
         <span>{specialization}</span>
