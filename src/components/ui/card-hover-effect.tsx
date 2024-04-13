@@ -1,11 +1,20 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { useState, SyntheticEvent } from "react"
 import { cn } from "@/lib/utils"
 import { AnimatePresence, motion } from "framer-motion"
 import { Trash, Pencil } from "lucide-react"
 import { Button } from "./button"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
 
 export interface DoctorProps {
   id: number
@@ -25,6 +34,8 @@ export const HoverEffect = ({
   let [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [isMutating, setIsMutating] = useState(false)
   const router = useRouter()
+  const [name, setName] = useState("")
+  const [specialization, setSpecialization] = useState("")
 
   async function handleDeleteDoctor(doctorId: number) {
     setIsMutating(true)
@@ -38,6 +49,25 @@ export const HoverEffect = ({
     window.alert("Doctor deleted successfully")
     router.refresh()
   }
+  
+
+  async function handleSubmit(e: SyntheticEvent, id: number) {
+    e.preventDefault()
+    setIsMutating(true)
+
+    await fetch(`http://localhost:3001/doctors/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ name, specialization })
+    })
+    setName("")
+    setSpecialization("")
+    router.replace("http://localhost:3000/doctors")
+  }
+
+
 
   return (
     <div
@@ -81,9 +111,46 @@ export const HoverEffect = ({
                 >
                   <Trash />
                 </Button>
-                <Button variant="secondary" size="icon">
-                  <Pencil />
-                </Button>
+                <Dialog>
+                  <DialogTrigger>
+                  <Button variant="secondary" size="icon">
+                    <Pencil />
+                  </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Edit</DialogTitle>
+                      <DialogDescription>
+                      <form
+                        onSubmit={(e) => handleSubmit(e, doctor.id)}
+                        className="flex flex-col items-center text-black w-full space-y-4 mt-4 py-4"
+                      >
+                        <Input
+                          type="text"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Doctor name"
+                          className="border border-gray-300 text-md font-bold text-md p-2 rounded-lg w-full h-16"
+                        />
+                        <Input
+                          type="text"
+                          value={specialization}
+                          onChange={(e) => setSpecialization(e.target.value)}
+                          placeholder="Specialization"
+                          className="border border-gray-300 text-md font-bold p-2 rounded-md w-full h-16"
+                        />
+                        <Button
+                          type="submit"
+                          variant="default"
+                          className="bg-cyan-700 text-white p-2 rounded-md w-56 h-14"
+                        >
+                          {isMutating ? "Updating..." : "Update"}
+                        </Button>
+                      </form>
+                      </DialogDescription>
+                    </DialogHeader>
+                  </DialogContent>
+                </Dialog>
               </CardActions>
             </Card>
           </div>

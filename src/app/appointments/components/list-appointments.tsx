@@ -112,7 +112,7 @@ const ListAppointments = () => {
               <td className="px-6 py-4 whitespace-nowrap">{a.id}</td>
               <td className="px-6 py-4 whitespace-nowrap">{doctors.find(d => d.id == a.doctor_id)?.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">{patients.find(d => d.id == a.patient_id)?.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{a.date}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{new Date(a.date).toLocaleString('pt-br')}</td>
               <td className="px-6 py-4 whitespace-nowrap">{a.symptoms}</td>
               <td>
                 <Dropdown
