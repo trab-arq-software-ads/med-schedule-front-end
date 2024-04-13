@@ -79,7 +79,9 @@ const ListAppointments = (props: propsType) => {
     goToEditPage(id)
   }
 
-  const goToEditPage = (id: number) => {}
+  const goToEditPage = (id: number) => {
+    router.push(`http://localhost:3000/appointments/${id}`)
+  }
 
   return (
     <div className="container mx-auto px-4 py-2">

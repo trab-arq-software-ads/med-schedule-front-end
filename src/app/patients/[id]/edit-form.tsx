@@ -29,7 +29,6 @@ export function PatientEditForm(props: PropsType) {
             setName(data.patients.name)
             setEmail(data.patients.email)
             setPhone(data.patients.phone)
-            console.log(data, "DATA")
         } catch (error) {
             console.error("Error fetching doctors:", error)
         }
