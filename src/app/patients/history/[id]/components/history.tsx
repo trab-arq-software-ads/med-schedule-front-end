@@ -23,7 +23,7 @@ type propsType = {
 const ListAppointments = (props: propsType) => {
   const [appointments, setAppointments] = useState<AppointmentsProps[]>([])
   const [doctors, setDoctors] = useState<PatientProps[]>([])
-  const [patients, setPatients] = useState<PatientProps>([])
+  const [patients, setPatients] = useState<PatientProps[]>([])
   const [isMutating, setIsMutating] = useState(false)
 
   const router = useRouter()
@@ -115,7 +115,7 @@ const ListAppointments = (props: propsType) => {
             <tr key={a.id} className="hover:bg-gray-100 cursor-pointer">
               <td className="px-6 py-4 whitespace-nowrap">{a.id}</td>
               <td className="px-6 py-4 whitespace-nowrap">{doctors.find(d => d.id == a.doctor_id)?.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap">{patients.find(p => p.id == a.patient_id)?.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap">{patients.find(d => d.id == a.patient_id)?.name}</td>
               <td className="px-6 py-4 whitespace-nowrap">{new Date(a.date).toLocaleString('pt-br')}</td>
               <td className="px-6 py-4 whitespace-nowrap">{a.symptoms}</td>
               <td>
